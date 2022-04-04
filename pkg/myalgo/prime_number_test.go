@@ -9,9 +9,19 @@ func Test_IsPrime(t *testing.T) {
 		want   bool
 	}{
 		{
-			name:   "正常",
-			number: 0,
+			name:   "素数",
+			number: 53,
 			want:   true,
+		},
+		{
+			name:   "合成数",
+			number: 77,
+			want:   false,
+		},
+		{
+			name:   "0は素数ではない",
+			number: 0,
+			want:   false,
 		},
 	}
 	for _, tt := range tests {
