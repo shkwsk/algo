@@ -71,6 +71,52 @@ func TestDivisorEnumeration(t *testing.T) {
 			}
 			got := DivisorEnumeration(tt.args.n)
 			if diff := cmp.Diff(got, tt.want, opts...); diff != "" {
+				t.Errorf("DivisorEnumeration() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestPrimeFactrization(t *testing.T) {
+	type args struct {
+		n int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		{
+			name: "正常",
+			args: args{
+				n: 100,
+			},
+			want: []int{2, 2, 5, 5},
+		},
+		{
+			name: "正常",
+			args: args{
+				n: 286,
+			},
+			want: []int{2, 11, 13},
+		},
+		{
+			name: "正常",
+			args: args{
+				n: 20211225,
+			},
+			want: []int{3, 5, 5, 31, 8693},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			opts := []cmp.Option{
+				cmpopts.SortSlices(func(i, j int) bool {
+					return i < j
+				}),
+			}
+			got := PrimeFactrization(tt.args.n)
+			if diff := cmp.Diff(got, tt.want, opts...); diff != "" {
 				t.Errorf("PrimeFactrization() = %v, want %v", got, tt.want)
 			}
 		})

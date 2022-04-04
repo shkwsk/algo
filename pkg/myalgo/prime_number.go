@@ -28,3 +28,21 @@ func DivisorEnumeration(n int) []int {
 	}
 	return ret
 }
+
+func PrimeFactrization(n int) []int {
+	if n <= 0 {
+		return []int{}
+	}
+	var ret []int
+	for i := 2; i*i <= n; i++ {
+		// 素数でなければskip
+		for n%i == 0 {
+			n = n / i
+			ret = append(ret, i)
+		}
+	}
+	if n >= 2 {
+		ret = append(ret, n)
+	}
+	return ret
+}
