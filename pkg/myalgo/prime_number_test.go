@@ -1,8 +1,13 @@
 package myalgo
 
-import "testing"
+import (
+	"testing"
 
-func Test_IsPrime(t *testing.T) {
+	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
+)
+
+func TestIsPrime(t *testing.T) {
 	tests := []struct {
 		name   string
 		number int
@@ -28,6 +33,45 @@ func Test_IsPrime(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := IsPrime(tt.number); got != tt.want {
 				t.Errorf("isPrime() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestDivisorEnumeration(t *testing.T) {
+	type args struct {
+		n int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		{
+			name: "0は約数なし",
+			args: args{
+				n: 0,
+			},
+			want: []int{},
+		},
+		{
+			name: "正常",
+			args: args{
+				n: 100,
+			},
+			want: []int{1, 2, 4, 5, 10, 20, 25, 50, 100},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			opts := []cmp.Option{
+				cmpopts.SortSlices(func(i, j int) bool {
+					return i < j
+				}),
+			}
+			got := DivisorEnumeration(tt.args.n)
+			if diff := cmp.Diff(got, tt.want, opts...); diff != "" {
+				t.Errorf("PrimeFactrization() = %v, want %v", got, tt.want)
 			}
 		})
 	}
