@@ -27,5 +27,8 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
+    - name: Build
+      run: go build -v ./...
+
     - name: Run Application
       run: ./algo -i 10
