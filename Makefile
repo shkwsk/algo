@@ -9,17 +9,12 @@ APPNAME=algo
 all: test build
 
 .PHONY: build
-build:
-	$(GOBUILD) -o $(APPNAME) cmd/$(APPNAME)/main.go
+build-cli:
+	$(GOBUILD) -o $(APPNAME) cmd/cli/main.go
 
 .PHONY: test
 test:
 	$(GOTEST) -v ./...
-
-.PHONY: run
-run:
-	$(GOBUILD) -o $(APPNAME) cmd/$(APPNAME)/main.go
-	./$(APPNAME)
 
 .PHONY: clean
 clean:
