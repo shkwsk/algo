@@ -23,3 +23,9 @@ jobs:
 
     - name: Test
       run: go test -v ./...
+
+  run:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run Application
+      run: ./algo -i 10
